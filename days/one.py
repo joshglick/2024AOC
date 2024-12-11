@@ -21,4 +21,20 @@ def part_one():
     return distance
 
 def part_two():
-    return 0
+    left = []
+    right = {}
+    with open(INPUT, 'r') as input_file:
+        lines = input_file.readlines()
+        for line in lines:
+            output = line.split('   ')
+            left.append(int(output[0]))
+            if int(output[1]) not in right:
+                right[int(output[1])] = 0
+            right[int(output[1])] += 1
+
+    similarity = 0
+    for i in range(len(left)):
+        if left[i] in right:
+            similarity += left[i] * right[left[i]]
+
+    return similarity
